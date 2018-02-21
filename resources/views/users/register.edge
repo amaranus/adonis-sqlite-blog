@@ -28,7 +28,7 @@
         <!-- Text input http://getbootstrap.com/css/#forms -->
         <div class="form-group">
             <label for="password_confirmation"></label>
-            <input type="password" class="form-control" name="password_confirmation" value="{{old('password_confirmation','')}}" placeholder="Password"> 
+            <input type="password" class="form-control" name="password_confirmation" value="{{old('password_confirmation','')}}" placeholder="Retype Password"> 
             {{ elIf('<span class="text-danger">$self</span>',getErrorFor('password'),hasErrorFor('password')) }}
         </div>
         <!-- Button http://getbootstrap.com/css/#buttons -->

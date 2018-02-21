@@ -37,7 +37,8 @@ class UserController {
             return 'You cannot see someone else\'s profile'
         }
         return view.render('users.profile', {
-            user: auth.user
+            user: auth.user,
+            breadcrumb: `<li class="breadcrumb-item active" aria-current="page">Users / Profile`
         })
     }
 
@@ -45,7 +46,9 @@ class UserController {
         try {
             await auth.check()
         } catch (error) {
-            return view.render('users.register')
+            return view.render('users.register', {
+                breadcrumb: `<li class="breadcrumb-item active" aria-current="page">Users / Register</li>`
+            })
         }
     }
 
@@ -83,7 +86,7 @@ class UserController {
 
         await auth.login(user)
 
-        return response.redirect('/users/profile/'+ user.id)
+        return response.redirect('/users/profile/' + user.id)
     }
 
 
@@ -92,7 +95,9 @@ class UserController {
         try {
             await auth.check()
         } catch (error) {
-            return view.render('users.login')
+            return view.render('users.login', {
+                breadcrumb: `<li class="breadcrumb-item active" aria-current="page">Users / Login</li>`
+            })
         }
     }
 

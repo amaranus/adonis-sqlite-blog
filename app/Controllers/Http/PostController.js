@@ -20,7 +20,8 @@ class PostController {
     // View döndürme ayrıca değer paslama
     async home({ view, auth }) {
         return view.render('home', {
-            user: auth.user
+            user: auth.user,
+            breadcrumb: '<li class="breadcrumb-item active" aria-current="page"></li>'
         })
     }
 
@@ -47,14 +48,14 @@ class PostController {
         }
 
         return view.render('posts.index', {
-            title: page,
             // Elle data ile
             // posts: posts
             // SQLite ile toJSON() yazılmazsa undefined olur
             posts: ((posts.toJSON()).data),
             pages: pages,
             page:page,
-            user: auth.user
+            user: auth.user,
+            breadcrumb: `<li class="breadcrumb-item active" aria-current="page"><a href="/posts/page/1">Latest Posts</a> / Page: ${page}</li>`
         })
     }
 
@@ -62,9 +63,11 @@ class PostController {
     // Post detay sayfasını aç
     async details({ params, view, auth }) {
         const post = await Post.find(params.id)
+        const page = params.page
         return view.render('posts.details', {
             post: post,
-            user: auth.user
+            user: auth.user,
+            breadcrumb: `<li class="breadcrumb-item active" aria-current="page"><a href="/posts/page/1">Latest Posts</a> / <a href="/posts/page/${page}">Page: ${page} </a> / ${post.title}</li>`
         })
     }
 
@@ -73,7 +76,8 @@ class PostController {
         try {
             await auth.check()
             return view.render('posts.add', {
-                user: auth.user
+                user: auth.user,
+                breadcrumb: `<li class="breadcrumb-item active" aria-current="page"><a href="/posts/page/1">Latest Posts</a> / Add Post</li>`
             })
         } catch (error) {
             return response.redirect('/users/login')
