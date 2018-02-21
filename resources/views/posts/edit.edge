@@ -1,0 +1,27 @@
+@layout('main') 
+@section('content')
+<a href="javascript:history.back()">Go back</a>
+<hr>
+<h1>Edit Post</h1>
+<form action="/posts/{{post.id}}?_method=PUT" method="POST">
+    {{ csrfField() }}
+
+    @if(flashMessage('notification'))
+    <div class="alert alert-success" role="alert">{{ flashMessage('notification') }}</div>
+    @endif
+
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" class="form-control" placeholder="Title" value="{{ post.title }}"> 
+        {{ elIf('<span class="text-danger">$self</span>',getErrorFor('title'),hasErrorFor('title')) }}
+    </div>
+    <div class="form-group">
+        <label for="body">Body</label>
+        <textarea name="body" class="form-control" rows="8" placeholder="Body">{{post.body}}</textarea> 
+    {{ elIf('<span class="text-danger">$self</span>',getErrorFor('body'),hasErrorFor('body')) }}
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+</form>
+@endsection

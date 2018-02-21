@@ -1,0 +1,42 @@
+@layout('main') 
+@section('content')
+<div class="col-md-6 center">
+<form method="POST" action="/users/register">
+    {{ csrfField() }}
+    <fieldset>
+        <!-- change col-sm-N to reflect how you would like your column spacing (http://getbootstrap.com/css/#forms-control-sizes) -->
+        <!-- Form Name -->
+        <legend>Register Form</legend>
+        <!-- Text input http://getbootstrap.com/css/#forms -->
+        <div class="form-group">
+            <label for="username"></label>
+            <input type="text" class="form-control" name="username" value="{{old('username','')}}" placeholder="Username"> 
+            {{ elIf('<span class="text-danger">$self</span>',getErrorFor('username'),hasErrorFor('username')) }}
+        </div>
+        <!-- Text input http://getbootstrap.com/css/#forms -->
+        <div class="form-group">
+            <label for="email"></label>
+            <input type="email" class="form-control" name="email" value="{{old('email','')}}" placeholder="Email"> 
+            {{ elIf('<span class="text-danger">$self</span>',getErrorFor('email'),hasErrorFor('email')) }}
+        </div>
+        <!-- Text input http://getbootstrap.com/css/#forms -->
+        <div class="form-group">
+            <label for="password"></label>
+            <input type="password" class="form-control" name="password" value="{{old('password','')}}" placeholder="Password"> 
+            {{ elIf('<span class="text-danger">$self</span>',getErrorFor('password'),hasErrorFor('password')) }}
+        </div>
+        <!-- Text input http://getbootstrap.com/css/#forms -->
+        <div class="form-group">
+            <label for="password_confirmation"></label>
+            <input type="password" class="form-control" name="password_confirmation" value="{{old('password_confirmation','')}}" placeholder="Password"> 
+            {{ elIf('<span class="text-danger">$self</span>',getErrorFor('password'),hasErrorFor('password')) }}
+        </div>
+        <!-- Button http://getbootstrap.com/css/#buttons -->
+        <div class="form-group">
+            <label for=""></label>
+            <button type="submit" id="" name="" class="btn btn-primary" aria-label="">Register</button>
+        </div>
+    </fieldset>
+</form>
+</div>
+@endsection

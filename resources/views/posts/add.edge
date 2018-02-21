@@ -1,0 +1,24 @@
+@layout('main') 
+
+    @section('content')
+<a href="javascript:history.back()">Go back</a>
+<hr>
+<legend>Add Post</legend>
+<form action="{{ route('PostController.store') }}" method="POST">
+{{ csrfField() }}
+
+<div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" class="form-control" placeholder="Title" value="{{old('title','')}}">
+    {{ elIf('<span class="text-danger">$self</span>',getErrorFor('title'),hasErrorFor('title')) }}
+</div>
+<div class="form-group">
+    <label for="body">Body</label>
+    <textarea name="body" class="form-control" rows="8" placeholder="Body">{{old('body','')}}</textarea>
+     {{ elIf('<span class="text-danger">$self</span>',getErrorFor('body'),hasErrorFor('body')) }}
+</div>
+<div class="form-group">
+    <button class="btn btn-primary" type="submit">Submit</button>
+</div>
+</form>
+@endsection

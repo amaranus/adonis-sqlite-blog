@@ -1,0 +1,33 @@
+@layout('main') 
+@section('content')
+<div class="col-md-6 center">
+<form  method="POST" action="/users/login">
+    <fieldset>
+        {{ csrfField() }}
+        <!-- change col-sm-N to reflect how you would like your column spacing (http://getbootstrap.com/css/#forms-control-sizes) -->
+        <!-- Form Name -->
+        <legend>Login Form</legend>
+        <!-- Text input http://getbootstrap.com/css/#forms -->
+        <div class="form-group">
+            <label for="email"></label>
+                @if(flashMessage('notification'))
+                <div class="alert alert-danger" role="alert">{{ flashMessage('notification') }}</div>
+                @endif
+                <input type="email" class="form-control" name="email" placeholder="Email"> 
+                {{ elIf('<span class="text-danger">$self</span>',getErrorFor('email'),hasErrorFor('email')) }}
+        </div>
+        <!-- Text input http://getbootstrap.com/css/#forms -->
+        <div class="form-group">
+            <label for="password"></label>
+                <input type="password" class="form-control" name="password" placeholder="Password"> 
+                {{ elIf('<span class="text-danger">$self</span>',getErrorFor('password'),hasErrorFor('password')) }}
+        </div>
+        <!-- Button http://getbootstrap.com/css/#buttons -->
+        <div class="form-group">
+            <label></label>
+                <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </fieldset>
+</form>
+</div>
+@endsection

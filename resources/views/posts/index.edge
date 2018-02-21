@@ -1,0 +1,32 @@
+@layout('main') 
+@section('content')
+
+<legend>Latest Posts <small>(Page: {{title}})</small></legend>
+@if(old('notification'))
+<div class="alert alert-success">
+    {{ old('notification') }}
+</div>
+@endif
+
+<ul class="list-group">
+    @each(post in posts)
+    <li class="list-group-item">
+        <a href="/posts/page/{{page}}/{{post.id}}">{{post.title}}</a> -
+        <i class="far fa-clock"></i> {{post.created_at}} -
+        <i class="far fa-edit"></i> {{post.updated_at}}
+        <i class="far fa-user"></i> {{post.author}}
+    </li>
+    @endeach
+</ul>
+<br>
+<nav aria-label="...">
+
+    <ul class="pagination justify-content-center">
+        @each(page in pages)
+        <li class="page-item">
+            <a class="page-link" href="/posts/page/{{page}}">{{page}}</a>
+        </li>
+        @endeach
+    </ul>
+</nav>
+@endsection

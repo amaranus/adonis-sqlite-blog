@@ -1,0 +1,24 @@
+@layout('main') 
+@section('content')
+<a href="javascript:history.back()">Go back</a>
+<hr>
+<h2> {{post.title}}
+    <small>by {{post.author}} </small>
+</h2>
+<p> {{post.body}} </p>
+
+<hr>
+<p>
+    <i class="far fa-clock"></i> {{post.created_at}} -
+    <i class="far fa-edit"></i> {{post.updated_at}}
+</p>
+
+@if(user.username === post.author)
+<a href="/posts/edit/{{post.id}}" class="btn btn-dark d-block float-left">Edit</a>
+
+<form action="/posts/{{post.id}}?_method=DELETE" method="POST">
+    {{csrfField()}}
+    <button type="submit" class="btn btn-danger d-block float-right">Delete</button>
+</form>
+@endif 
+@endsection

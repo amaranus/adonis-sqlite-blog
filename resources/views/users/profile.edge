@@ -1,0 +1,39 @@
+@layout('main') 
+@section('content')
+<div class="col-md-6 center">
+
+@if(flashMessage('notification'))
+    <div class="alert alert-danger" role="alert">{{ flashMessage('notification') }}</div>
+@endif
+
+<form action="/users/profile/{{user.id}}?_method=PUT" method="POST">
+     {{ csrfField() }}
+    <fieldset>
+        <!-- Form Name -->
+        <legend>Profile Form</legend>
+        <!-- Text input http://getbootstrap.com/css/#forms -->
+        <div class="form-group">
+            <label for="username" class="control-label">Username</label>
+            <input type="text" class="form-control" name="username" value="{{user.username}}">
+        </div>
+        <!-- Text input http://getbootstrap.com/css/#forms -->
+        <div class="form-group">
+            <label for="email" class="control-label">Email</label>
+            <input type="email" class="form-control" name="email" value="{{user.email}}" disabled>
+        </div>
+        <!-- Text input http://getbootstrap.com/css/#forms -->
+        <div class="form-group">
+            <label for="passwrod" class="control-label">Password</label>
+            <input type="password" class="form-control" name="password" value="{{user.password}}">
+        </div>
+        <!-- Button http://getbootstrap.com/css/#buttons -->
+        <div class="form-group">
+            <label class="control-label" for=""></label>
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary" aria-label="">Submit</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+</div>
+@endsection
